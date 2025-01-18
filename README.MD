@@ -1,6 +1,5 @@
-# Python application that combines multiple PDFs, providing an interface
-
-# side note. open/run through python interpreter, not through virtual env like wsl.
+### Description
+- Python application that combines multiple PDFs, providing an interface
 
 ### Program Sample
 
@@ -23,3 +22,6 @@ Double-click main.py file
 
 ### Optional for easier use
 - Create shortcut to launch 'main.py' from the project folder
+
+### side note. 
+- open/run through python interpreter, not through virtual env like wsl.

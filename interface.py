@@ -25,12 +25,17 @@ class PDFMergerApp(QWidget):
         mergeButton = QPushButton("Merge PDFs", self)
         layout.addWidget(mergeButton)
 
+        # Button to remove selected files
+        removeButton = QPushButton("Remove Selected", self)
+        layout.addWidget(removeButton)
+
         # Set up drag and drop
         self.setAcceptDrops(True)
 
         # Connect buttons to corresponding actions
         selectButton.clicked.connect(self.selectFiles)
         mergeButton.clicked.connect(self.mergePDFs)
+        removeButton.clicked.connect(self.removeSelectedFiles)
 
     def dragEnterEvent(self, event: QDragEnterEvent):
         if event.mimeData().hasUrls():
@@ -46,6 +51,17 @@ class PDFMergerApp(QWidget):
         files, _ = QFileDialog.getOpenFileNames(self, "Select PDF Files", "", "PDF Files (*.pdf)")
         for file in files:
             self.pdfList.addItem(file)
+
+    def removeSelectedFiles(self):
+        # Get the currently selected items
+        selected_items = self.pdfList.selectedItems()
+        
+        if selected_items:
+            for item in selected_items:
+                row = self.pdfList.row(item)
+                self.pdfList.takeItem(row)  # Remove item from the list
+        else:
+            QMessageBox.warning(self, "Error", "Please select a file to remove.")
 
     def mergePDFs(self):
         if self.pdfList.count() < 2:
